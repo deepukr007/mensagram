@@ -12,13 +12,20 @@ import { useToast } from "@/hooks/use-toast";
 
 import FoodSelectUpload from "./FoodSelectUpload";
 
-import { FaCirclePlus } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { supabase, main_table_name } from "@/database/supabase_client";
 
+/**
+ * Renders a dialog component for adding an image.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.dishes - The array of dishes.
+ * @returns {JSX.Element} The rendered AddImageDialog component.
+ */
 export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
   const [open, setOpen] = useState(false);
   const [selectedDishID, setselectedDishID] = useState<string | null>(null);
@@ -73,7 +80,9 @@ export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <FaCirclePlus size="48px" color="#eab308" />
+        <button className="text-lg bg-yellow-500 rounded-full p-3 w-[200px]">
+          Upload Photo
+        </button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -110,7 +119,7 @@ export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
 
         <DialogFooter>
           <Button
-            className=" bg-yellow-600"
+            className=" bg-yellow-500 text-black"
             type="submit"
             onClick={handleSubmit}
           >

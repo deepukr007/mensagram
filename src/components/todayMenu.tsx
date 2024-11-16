@@ -4,8 +4,7 @@ import Foodcard from "./Foodcard.js";
 
 export default function TodayMenu({ onDataChange }: { onDataChange: any }) {
   const [results, setResults] = useState<any[] | null>(null);
-  const dateObj = Date.now();
-  const tdate = new Date(dateObj);
+  const tdate = new Date();
   const today = tdate.toISOString().slice(0, 10);
 
   useEffect(() => {
@@ -17,6 +16,7 @@ export default function TodayMenu({ onDataChange }: { onDataChange: any }) {
       .from(main_table_name)
       .select("*")
       .eq("menu_date", today);
+    console.log(today);
     setResults(data);
     onDataChange(data);
   }

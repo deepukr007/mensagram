@@ -19,9 +19,9 @@ function App() {
           <h1 className="mb-3 text-yellow-500 font-medium">Mensagram</h1>
         </div>
 
-        <div className="w-full text-sm">
+        <div className="w-full text-sm ml-2 mr-2">
           <input
-            className="p-3 outline-none bg-slate-100 rounded-full w-3/4"
+            className="p-3 outline-none bg-slate-100 rounded-full w-full"
             type="text"
             placeholder="Search Food..."
           />
@@ -41,8 +41,8 @@ function App() {
         </TabsContent>
       </Tabs>
 
-      <div className="fixed bottom-0 p-5 w-32 flex justify-items-start -right-2 ">
-        <div className="justify-self-start">
+      <div className="fixed bottom-0 pb-5 w-full flex justify-center ">
+        <div>
           <AddImageDialog dishes={results} />
         </div>
       </div>
