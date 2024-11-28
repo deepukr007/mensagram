@@ -16,7 +16,6 @@ export default function TodayMenu({ onDataChange }: { onDataChange: any }) {
       .from(main_table_name)
       .select("*")
       .eq("menu_date", today);
-    console.log(today);
     setResults(data);
     onDataChange(data);
   }

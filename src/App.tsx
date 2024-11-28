@@ -1,15 +1,30 @@
 import Explore from "./components/explore.js";
 import "./index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddImageDialog from "./components/addImageDialog.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TodayMenu from "./components/todayMenu.js";
+import Searchbar from "./components/searchbar.js";
 
 function App() {
   const [results, setResults] = useState<any[] | null>(null);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
 
   const handleDataChange = (data: any[]) => {
     setResults(data);
+  };
+
+  useEffect(() => {}, [results]);
+
+  const onSearch = (query: string) => {
+    console.log("results", results);
+
+    const filteredResults =
+      results?.filter((result) =>
+        result.title.toLowerCase().includes(query.toLowerCase())
+      ) || [];
+    setSearchResults(filteredResults);
+    console.log("results", searchResults);
   };
 
   return (
@@ -18,14 +33,7 @@ function App() {
         <div>
           <h1 className="mb-3 text-yellow-500 font-medium">Mensagram</h1>
         </div>
-
-        <div className="w-full text-sm ml-2 mr-2">
-          <input
-            className="p-3 outline-none bg-slate-100 rounded-full w-full"
-            type="text"
-            placeholder="Search Food..."
-          />
-        </div>
+        <Searchbar onSearch={onSearch} />
       </header>
 
       <Tabs defaultValue="Today" className="w-full">
