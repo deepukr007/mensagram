@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
-
+import default_img from "@/images/default.jpg";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function Foodcard({
@@ -73,14 +73,16 @@ function Foodcard({
   }
 
   return (
-    <div className="w-96 mb-5 rounded-md overflow-hidden m-1 p-0 shadow-lg">
+    <div className="w-96 mb-5 rounded-md overflow-hidden m-2 p-0 shadow-lg">
       <div className="rounded-md overflow-hidden">
         {url != "null" ? (
           <img width="100%" src={imageURL} />
         ) : (
-          <div>
-            <Skeleton className="w-100 h-48" />{" "}
-            <p className="text-xs text-left pl-2">Click to upload Photo</p>
+          <div className="relative">
+            <img width="100%" className="p-5 m-1" src={default_img} />
+            <p className="absolute text-xs p-2 m-1 top-10 bg-slate-300 text-gray-600 rounded-xl">
+              Click to upload Photo
+            </p>
           </div>
         )}
       </div>

@@ -8,23 +8,23 @@ import Searchbar from "./components/searchbar.js";
 
 function App() {
   const [results, setResults] = useState<any[] | null>(null);
-  const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [tab, setTab] = useState<string>("Today");
 
   const handleDataChange = (data: any[]) => {
     setResults(data);
   };
 
-  useEffect(() => {}, [results]);
-
   const onSearch = (query: string) => {
-    console.log("results", results);
+    setSearchQuery(query);
+    setTab("explore");
+  };
 
-    const filteredResults =
-      results?.filter((result) =>
-        result.title.toLowerCase().includes(query.toLowerCase())
-      ) || [];
-    setSearchResults(filteredResults);
-    console.log("results", searchResults);
+  const onTabChange = (tab: string) => {
+    setTab(tab);
+    if (tab === "Today") {
+      setSearchQuery("");
+    }
   };
 
   return (
@@ -36,7 +36,7 @@ function App() {
         <Searchbar onSearch={onSearch} />
       </header>
 
-      <Tabs defaultValue="Today" className="w-full">
+      <Tabs value={tab} className="w-full" onValueChange={onTabChange}>
         <TabsList>
           <TabsTrigger value="Today">Today's Menu</TabsTrigger>
           <TabsTrigger value="explore">Explore</TabsTrigger>
@@ -45,7 +45,7 @@ function App() {
           <TodayMenu onDataChange={handleDataChange} />
         </TabsContent>
         <TabsContent value="explore">
-          <Explore />
+          <Explore searchQuery={searchQuery} />
         </TabsContent>
       </Tabs>
 

@@ -80,7 +80,7 @@ export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <button className="text-lg bg-yellow-500 rounded-full p-3 w-[200px]">
+        <button className="text-sm text-slate-800 bg-yellow-500 font-medium rounded-full p-3 w-[150px]">
           Upload Photo
         </button>
       </DialogTrigger>
