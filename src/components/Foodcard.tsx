@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import default_img from "@/images/default.jpg";
-import { Skeleton } from "@/components/ui/skeleton";
 
 function Foodcard({
   id,

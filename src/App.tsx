@@ -1,6 +1,6 @@
 import Explore from "./components/explore.js";
 import "./index.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddImageDialog from "./components/addImageDialog.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TodayMenu from "./components/todayMenu.js";

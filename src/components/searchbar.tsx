@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Searchbar({ onSearch }: any) {
   const [query, setQuery] = useState<string>("");
