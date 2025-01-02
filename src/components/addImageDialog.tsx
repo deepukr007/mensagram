@@ -7,6 +7,7 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
+import imageCompression from "browser-image-compression";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -18,22 +19,48 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { supabase, main_table_name } from "@/database/supabase_client";
 
-/**
- * Renders a dialog component for adding an image.
- *
- * @component
- * @param {Object} props - The component props.
- * @param {Array} props.dishes - The array of dishes.
- * @returns {JSX.Element} The rendered AddImageDialog component.
- */
-export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
-  const [open, setOpen] = useState(false);
-  const [selectedDishID, setselectedDishID] = useState<string | null>(null);
+export default function AddImageDialog({
+  dishes,
+  openDiologue,
+  onCloseCallback,
+}: {
+  dishes: any[];
+  openDiologue: boolean;
+  onCloseCallback?: any;
+}) {
+  const [open, setOpen] = useState(openDiologue);
+  const [selectedDishID, setselectedDishID] = useState<string>(
+    dishes && dishes.length > 0 ? dishes[0].id : ""
+  );
   const [file, setFile] = useState<File | null>(null);
   const { toast } = useToast();
 
-  const handleFileChange = (e: any) => {
-    setFile(e.target.files[0]);
+  async function handleFileChange(e: any) {
+    const imageFile = e.target.files[0];
+    if (imageFile) {
+      console.log("originalFile instanceof Blob", file instanceof Blob); // true
+      console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+      const options = {
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      try {
+        const compressedFile = await imageCompression(imageFile, options);
+        console.log(
+          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        );
+        setFile(imageFile);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  const handleOpen = (value: boolean) => {
+    setOpen(value);
+    onCloseCallback(value);
   };
 
   const onSelect = (value: any) => {
@@ -41,8 +68,6 @@ export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
   };
 
   async function handleSubmit() {
-    console.log("Submitted");
-
     if (!file || !selectedDishID) {
       alert("Please select a file and Dish name");
       return;
@@ -78,7 +103,7 @@ export default function AddImageDialog({ dishes }: { dishes: any[] | null }) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger>
         <button className="text-sm text-slate-800 bg-yellow-500 font-medium rounded-full p-3 w-[150px]">
           Upload Photo

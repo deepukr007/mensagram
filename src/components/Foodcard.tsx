@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import default_img from "@/images/default.jpg";
+import AddImageDialog from "./addImageDialog";
 
 function Foodcard({
   id,
@@ -22,6 +23,7 @@ function Foodcard({
 }) {
   const [fav, setFav] = useState(false);
   const [likeCount, setlikeCount] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     if (likes !== null) {
@@ -31,6 +33,11 @@ function Foodcard({
 
   const mensa_images_URL = `${supabaseUrl}/storage/v1/object/public/`;
   const imageURL = `${mensa_images_URL}/${url}`;
+
+  function uploadPhoto() {
+    console.log("Upload photo");
+    setIsDialogOpen(true);
+  }
 
   async function handleLikes(): Promise<any> {
     setFav(!fav);
@@ -77,7 +84,7 @@ function Foodcard({
         {url != "null" ? (
           <img width="100%" src={imageURL} />
         ) : (
-          <div className="relative">
+          <div className="relative" onClick={uploadPhoto}>
             <img width="100%" className="p-5 m-1" src={default_img} />
             <p className="absolute text-xs p-2 m-1 top-10 bg-slate-300 text-gray-600 rounded-xl">
               Click to upload Photo
@@ -105,6 +112,13 @@ function Foodcard({
           </div>
         </div>
       </div>
+      {isDialogOpen && (
+        <AddImageDialog
+          dishes={[{ id: id, title: title }]}
+          openDiologue={true}
+          onCloseCallback={setIsDialogOpen}
+        />
+      )}
     </div>
   );
 }

@@ -7,7 +7,7 @@ import TodayMenu from "./components/todayMenu.js";
 import Searchbar from "./components/searchbar.js";
 
 function App() {
-  const [results, setResults] = useState<any[] | null>(null);
+  const [results, setResults] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [tab, setTab] = useState<string>("Today");
 
@@ -31,7 +31,10 @@ function App() {
     <div className="font-poppins text-3xl text-center p-3">
       <header className="p-3">
         <div>
-          <h1 className="mb-3 text-yellow-500 font-medium">Mensagram</h1>
+          <h1 className="mb-0 text-yellow-500 font-medium">Mensagram</h1>
+          <p className="mb-2 text-yellow-300 text-xs text-center ml-20  ">
+            Rempartstrasse
+          </p>
         </div>
         <Searchbar onSearch={onSearch} />
       </header>
@@ -51,7 +54,7 @@ function App() {
 
       <div className="fixed bottom-0 pb-5 w-full flex justify-center ">
         <div>
-          <AddImageDialog dishes={results} />
+          <AddImageDialog dishes={results} openDiologue={false} />
         </div>
       </div>
     </div>

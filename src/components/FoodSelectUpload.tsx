@@ -12,7 +12,7 @@ export default function FoodSelectUpload({
   dishes,
   selectCallback,
 }: {
-  dishes: any[] | null;
+  dishes: any[];
   selectCallback: any;
 }) {
   const onSelectDish = (value: any) => {
@@ -21,7 +21,7 @@ export default function FoodSelectUpload({
   };
 
   return (
-    <Select onValueChange={onSelectDish}>
+    <Select onValueChange={onSelectDish} defaultValue={dishes[0]?.id}>
       <SelectTrigger className="w-[250px]">
         <SelectValue placeholder="Select the dish" />
       </SelectTrigger>
