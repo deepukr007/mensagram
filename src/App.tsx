@@ -5,13 +5,14 @@ import AddImageDialog from "./components/addImageDialog.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TodayMenu from "./components/todayMenu.js";
 import Searchbar from "./components/searchbar.js";
+import EssenKarma from "./components/essenKarma.js";
 
 function App() {
   const [results, setResults] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [tab, setTab] = useState<string>("Today");
 
-  const handleDataChange = (data: any[]) => {
+  const handlemenucallback = (data: any[]) => {
     setResults(data);
   };
 
@@ -30,11 +31,16 @@ function App() {
   return (
     <div className="font-poppins text-3xl text-center p-3">
       <header className="p-3">
-        <div>
-          <h1 className="mb-0 text-yellow-500 font-medium">Mensagram</h1>
-          <p className="mb-2 text-yellow-300 text-xs text-center ml-20  ">
-            Rempartstrasse
-          </p>
+        <div className="grid grid-cols-10 w-full">
+          <div className="col-span-10 justify-self-center">
+            <h1 className="mb-0 text-yellow-500 font-medium">Mensagram</h1>
+            <p className="mb-2 text-yellow-300 text-xs text-center ml-20  ">
+              Rempartstrasse
+            </p>
+          </div>
+          {/* <div className="justify-self-end">
+            <EssenKarma />
+          </div> */}
         </div>
         <Searchbar onSearch={onSearch} />
       </header>
@@ -45,7 +51,7 @@ function App() {
           <TabsTrigger value="explore">Explore</TabsTrigger>
         </TabsList>
         <TabsContent value="Today">
-          <TodayMenu onDataChange={handleDataChange} />
+          <TodayMenu menucallback={handlemenucallback} />
         </TabsContent>
         <TabsContent value="explore">
           <Explore searchQuery={searchQuery} />

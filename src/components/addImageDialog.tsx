@@ -23,10 +23,12 @@ export default function AddImageDialog({
   dishes,
   openDiologue,
   onCloseCallback,
+  hideTrigger = false,
 }: {
   dishes: any[];
   openDiologue: boolean;
   onCloseCallback?: any;
+  hideTrigger?: boolean;
 }) {
   const [open, setOpen] = useState(openDiologue);
   const [selectedDishID, setselectedDishID] = useState<string>(
@@ -104,12 +106,12 @@ export default function AddImageDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
-      <DialogTrigger>
+      <DialogTrigger hidden={hideTrigger}>
         <button className="text-sm text-slate-800 bg-yellow-500 font-medium rounded-full p-3 w-[150px]">
           Upload Photo
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-screen">
         <DialogHeader>
           <DialogTitle>Upload a photo of the meal</DialogTitle>
           <DialogDescription className="text-left">

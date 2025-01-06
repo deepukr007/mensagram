@@ -15,11 +15,13 @@ function Foodcard({
   title,
   url,
   likes,
+  meal_type,
 }: {
   id: number;
   title: string;
   url: string;
   likes: number;
+  meal_type?: string;
 }) {
   const [fav, setFav] = useState(false);
   const [likeCount, setlikeCount] = useState(0);
@@ -79,10 +81,15 @@ function Foodcard({
   }
 
   return (
-    <div className="w-96 mb-5 rounded-md overflow-hidden m-2 p-0 shadow-lg">
+    <div className="w-96 mb-5 rounded-md overflow-hidden m-2 p-0 shadow-xl">
       <div className="rounded-md overflow-hidden">
         {url != "null" ? (
-          <img width="100%" src={imageURL} />
+          <div className="realtive">
+            <img width="100%" src={imageURL} />
+            <p className="absolute text-xs p-1 m-2 bottom-10 right-10 bg-yellow-400 text-gray-600 rounded-xl">
+              {meal_type}
+            </p>
+          </div>
         ) : (
           <div className="relative" onClick={uploadPhoto}>
             <img width="100%" className="p-5 m-1" src={default_img} />
@@ -117,6 +124,7 @@ function Foodcard({
           dishes={[{ id: id, title: title }]}
           openDiologue={true}
           onCloseCallback={setIsDialogOpen}
+          hideTrigger={true}
         />
       )}
     </div>
