@@ -16,12 +16,14 @@ function Foodcard({
   url,
   likes,
   meal_type,
+  image_approved,
 }: {
   id: number;
   title: string;
   url: string;
   likes: number;
   meal_type?: string;
+  image_approved: boolean;
 }) {
   const [fav, setFav] = useState(false);
   const [likeCount, setlikeCount] = useState(0);
@@ -83,7 +85,7 @@ function Foodcard({
   return (
     <div className="w-96 mb-5 rounded-md overflow-hidden m-2 p-0 shadow-xl">
       <div className="rounded-md overflow-hidden">
-        {url != "null" ? (
+        {url != "null" && image_approved ? (
           <div className="realtive">
             <img width="100%" src={imageURL} />
             {meal_type && (

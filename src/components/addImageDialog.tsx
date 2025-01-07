@@ -97,8 +97,7 @@ export default function AddImageDialog({
         setOpen(false);
 
         if (!error) {
-          window.location.reload();
-          toast({ description: "Image uploaded successfully" });
+          toast({ description: "Image Submitted for approval" });
         }
       }
       if (error) {

@@ -32,6 +32,7 @@ export default function TodayMenu({ menucallback }: { menucallback: any }) {
               likes={result.likes}
               url={`${result.url}`}
               meal_type={result.meal_type}
+              image_approved={result.image_approved}
             />
           ))
         ) : (

@@ -11,7 +11,6 @@ export default function Explore({ searchQuery }: any) {
   }, [searchQuery]);
 
   async function getResults() {
-    console.log("searchQuery", searchQuery);
     if (searchQuery == "") {
       const { data } = await supabase.from(main_table_name).select("*");
       setResults(data);
@@ -48,6 +47,7 @@ export default function Explore({ searchQuery }: any) {
               title={result.title}
               likes={result.likes}
               url={`${result.url}`}
+              image_approved={result.image_approved}
             />
           ))}
       </div>
