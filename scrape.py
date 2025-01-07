@@ -71,7 +71,7 @@ def insert_data(weekly_menu):
     for day, menu in weekly_menu.items():
         md = day.split('.')
         date = datetime.datetime(
-            2024, int(md[1]), int(md[0])).strftime('%Y-%m-%d')
+            2025, int(md[1]), int(md[0])).strftime('%Y-%m-%d')
         print(f"\n{day}:")
         for item, description in menu.items():
             print(f"  {item}: {description}")

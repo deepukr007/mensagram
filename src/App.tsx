@@ -5,7 +5,7 @@ import AddImageDialog from "./components/addImageDialog.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TodayMenu from "./components/todayMenu.js";
 import Searchbar from "./components/searchbar.js";
-import EssenKarma from "./components/essenKarma.js";
+//import EssenKarma from "./components/essenKarma.js";
 
 function App() {
   const [results, setResults] = useState<any[]>([]);

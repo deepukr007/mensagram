@@ -86,9 +86,11 @@ function Foodcard({
         {url != "null" ? (
           <div className="realtive">
             <img width="100%" src={imageURL} />
-            <p className="absolute text-xs p-1 m-2 bottom-10 right-10 bg-yellow-400 text-gray-600 rounded-xl">
-              {meal_type}
-            </p>
+            {meal_type && (
+              <p className="absolute text-xs p-3 m-2 bottom-10 right-10 bg-yellow-200 text-gray-600 rounded-xl">
+                {meal_type}
+              </p>
+            )}
           </div>
         ) : (
           <div className="relative" onClick={uploadPhoto}>
@@ -96,6 +98,11 @@ function Foodcard({
             <p className="absolute text-xs p-2 m-1 top-10 bg-slate-300 text-gray-600 rounded-xl">
               Click to upload Photo
             </p>
+            {meal_type && (
+              <p className="absolute text-xs pr-3 pl-3 p-1 m-2 bottom-10 right-1 bg-yellow-400 text-gray-800 rounded-xl">
+                {meal_type}
+              </p>
+            )}
           </div>
         )}
       </div>

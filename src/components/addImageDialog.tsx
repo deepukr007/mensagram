@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { supabase, main_table_name } from "@/database/supabase_client";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddImageDialog({
   dishes,
@@ -34,17 +35,16 @@ export default function AddImageDialog({
   const [selectedDishID, setselectedDishID] = useState<string>(
     dishes && dishes.length > 0 ? dishes[0].id : ""
   );
-  const [file, setFile] = useState<File | null>(null);
+  const [compressedFile, setCompressedFile] = useState<File | null>(null);
   const { toast } = useToast();
 
   async function handleFileChange(e: any) {
     const imageFile = e.target.files[0];
     if (imageFile) {
-      console.log("originalFile instanceof Blob", file instanceof Blob); // true
       console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
       const options = {
-        maxSizeMB: 0.5,
+        maxSizeMB: 0.3,
         maxWidthOrHeight: 1920,
         useWebWorker: true,
       };
@@ -53,7 +53,7 @@ export default function AddImageDialog({
         console.log(
           `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
         );
-        setFile(imageFile);
+        setCompressedFile(compressedFile);
       } catch (error) {
         console.log(error);
       }
@@ -70,15 +70,18 @@ export default function AddImageDialog({
   };
 
   async function handleSubmit() {
-    if (!file || !selectedDishID) {
+    if (!compressedFile || !selectedDishID) {
       alert("Please select a file and Dish name");
       return;
     } else {
+      const uuid = uuidv4();
       const { data, error } = await supabase.storage
         .from("mensa_images")
         .upload(
-          `food_images/${selectedDishID}.${file.type.split("/")[1]}`,
-          file,
+          `food_images/${selectedDishID}_${uuid}.${
+            compressedFile.type.split("/")[1]
+          }`,
+          compressedFile,
           {
             cacheControl: "3600",
             upsert: true,
@@ -89,7 +92,7 @@ export default function AddImageDialog({
         const image_path = data.fullPath;
         const { error } = await supabase
           .from(main_table_name)
-          .update({ url: image_path })
+          .update({ url: `${image_path}` })
           .eq("id", selectedDishID);
         setOpen(false);
 
