@@ -39,7 +39,6 @@ function Foodcard({
   const imageURL = `${mensa_images_URL}/${url}`;
 
   function uploadPhoto() {
-    console.log("Upload photo");
     setIsDialogOpen(true);
   }
 
