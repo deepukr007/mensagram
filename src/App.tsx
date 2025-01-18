@@ -33,7 +33,7 @@ function App() {
       <header className="p-3">
         <div className="grid grid-cols-10 w-full">
           <div className="col-span-10 justify-self-center">
-            <h1 className="mb-0 text-yellow-500 font-medium">Mensagram</h1>
+            <h1 className="mb-0 text-yellow-400 font-medium">Mensagram</h1>
             <p className="mb-2 text-yellow-300 text-xs text-center ml-20  ">
               Rempartstrasse
             </p>
