@@ -5,6 +5,7 @@ import AddImageDialog from "./components/addImageDialog.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TodayMenu from "./components/todayMenu.js";
 import Searchbar from "./components/searchbar.js";
+// import PopupWithImage from "./components/popup.js";
 //import EssenKarma from "./components/essenKarma.js";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         </div>
         <Searchbar onSearch={onSearch} />
       </header>
+      {/* <PopupWithImage /> */}
 
       <Tabs value={tab} className="w-full" onValueChange={onTabChange}>
         <TabsList>

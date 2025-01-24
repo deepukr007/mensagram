@@ -40,16 +40,18 @@ export default function Explore({ searchQuery }: any) {
 
       <div className="flex flex-row flex-wrap justify-center">
         {results &&
-          results.map((result) => (
-            <Foodcard
-              key={result.id}
-              id={result.id}
-              title={result.title}
-              likes={result.likes}
-              url={`${result.url}`}
-              image_approved={result.image_approved}
-            />
-          ))}
+          results
+            .sort((a, b) => b.likes - a.likes)
+            .map((result) => (
+              <Foodcard
+                key={result.id}
+                id={result.id}
+                title={result.title}
+                likes={result.likes}
+                url={`${result.url}`}
+                image_approved={result.image_approved}
+              />
+            ))}
       </div>
     </>
   );

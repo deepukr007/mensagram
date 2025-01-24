@@ -24,17 +24,19 @@ export default function TodayMenu({ menucallback }: { menucallback: any }) {
     <>
       <div className="flex flex-row flex-wrap justify-center">
         {results && results.length !== 0 ? (
-          results.map((result) => (
-            <Foodcard
-              key={result.id}
-              id={result.id}
-              title={result.title}
-              likes={result.likes}
-              url={`${result.url}`}
-              meal_type={result.meal_type}
-              image_approved={result.image_approved}
-            />
-          ))
+          results
+            .sort((a, b) => b.likes - a.likes)
+            .map((result) => (
+              <Foodcard
+                key={result.id}
+                id={result.id}
+                title={result.title}
+                likes={result.likes}
+                url={`${result.url}`}
+                meal_type={result.meal_type}
+                image_approved={result.image_approved}
+              />
+            ))
         ) : (
           <div className="text-center w-full justify-center flex flex-col">
             <p className="mt-36 text-sm">No menu today—mensa’s on a diet.</p>
